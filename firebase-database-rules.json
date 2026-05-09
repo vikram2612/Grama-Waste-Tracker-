@@ -1,0 +1,42 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid == $uid || root.child('users').child(auth.uid).child('role').val() == 'admin')",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "tractor_location": {
+      ".read": "auth != null",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'admin'"
+    },
+    "blackspot_reports": {
+      ".read": "auth != null",
+      "$reportId": {
+        ".write": "auth != null",
+        "status": {
+          ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'admin'"
+        },
+        "resolvedAt": {
+          ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'admin'"
+        },
+        "resolvedBy": {
+          ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'admin'"
+        },
+        "adminNotes": {
+          ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'admin'"
+        }
+      }
+    },
+    "notifications": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null"
+      }
+    },
+    "waste_guides": {
+      ".read": "auth != null",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'admin'"
+    }
+  }
+}

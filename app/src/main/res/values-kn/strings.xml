@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ಗ್ರಾಮ ತ್ಯಾಜ್ಯ ಟ್ರ್ಯಾಕರ್</string>
+    <string name="app_tagline">ಸ್ವಚ್ಛ ಹಳ್ಳಿ, ಹಸಿರು ಹಳ್ಳಿ</string>
+
+    <!-- Auth -->
+    <string name="login">ಲಾಗಿನ್</string>
+    <string name="register">ನೋಂದಣಿ</string>
+    <string name="email">ಇಮೇಲ್</string>
+    <string name="password">ಪಾಸ್‌ವರ್ಡ್</string>
+    <string name="full_name">ಪೂರ್ಣ ಹೆಸರು</string>
+    <string name="phone_number">ಫೋನ್ ಸಂಖ್ಯೆ</string>
+    <string name="village_name">ಗ್ರಾಮದ ಹೆಸರು</string>
+    <string name="forgot_password">ಪಾಸ್‌ವರ್ಡ್ ಮರೆತಿರಾ?</string>
+    <string name="dont_have_account">ಖಾತೆ ಇಲ್ಲವೇ? ನೋಂದಣಿ ಮಾಡಿ</string>
+    <string name="already_have_account">ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ? ಲಾಗಿನ್</string>
+    <string name="logout">ಲಾಗ್ ಔಟ್</string>
+
+    <!-- Home -->
+    <string name="home">ಮುಖಪುಟ</string>
+    <string name="tractor_live_location">ಟ್ರ್ಯಾಕ್ಟರ್ ಲೈವ್ ಸ್ಥಳ</string>
+    <string name="tractor_status">ಟ್ರ್ಯಾಕ್ಟರ್ ಸ್ಥಿತಿ</string>
+    <string name="active">ಸಕ್ರಿಯ</string>
+    <string name="offline">ಆಫ್‌ಲೈನ್</string>
+    <string name="estimated_arrival">ಅಂದಾಜು ಆಗಮನ</string>
+    <string name="minutes_away">%d ನಿಮಿಷ ದೂರ</string>
+    <string name="track_tractor">ಟ್ರ್ಯಾಕ್ಟರ್ ಹುಡುಕಿ</string>
+
+    <!-- Blackspot -->
+    <string name="report_blackspot">ಬ್ಲ್ಯಾಕ್‌ಸ್ಪಾಟ್ ವರದಿ</string>
+    <string name="blackspot_reports">ಬ್ಲ್ಯಾಕ್‌ಸ್ಪಾಟ್ ವರದಿಗಳು</string>
+    <string name="upload_photo">ಫೋಟೋ ಅಪ್ಲೋಡ್</string>
+    <string name="take_photo">ಫೋಟೋ ತೆಗೆಯಿರಿ</string>
+    <string name="description">ವಿವರಣೆ</string>
+    <string name="add_description">ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆ ಸೇರಿಸಿ…</string>
+    <string name="submit_report">ವರದಿ ಸಲ್ಲಿಸಿ</string>
+    <string name="report_submitted">ವರದಿ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!</string>
+    <string name="pending">ಬಾಕಿ</string>
+    <string name="resolved">ಪರಿಹರಿಸಲಾಗಿದೆ</string>
+    <string name="mark_resolved">ಪರಿಹರಿಸಲಾಗಿದೆ ಎಂದು ಗುರುತಿಸಿ</string>
+
+    <!-- Waste Guide -->
+    <string name="waste_guide">ತ್ಯಾಜ್ಯ ಮಾರ್ಗದರ್ಶಿ</string>
+    <string name="dry_waste">ಒಣ ತ್ಯಾಜ್ಯ</string>
+    <string name="wet_waste">ಹಸಿ ತ್ಯಾಜ್ಯ</string>
+    <string name="hazardous_waste">ಅಪಾಯಕಾರಿ ತ್ಯಾಜ್ಯ</string>
+    <string name="dry_waste_desc">ಕಾಗದ, ಪೆಟ್ಟಿಗೆ, ಪ್ಲಾಸ್ಟಿಕ್ ಬಾಟಲಿಗಳು, ಲೋಹದ ಡಬ್ಬಗಳು, ಗಾಜು, ಬಟ್ಟೆ, ರಬ್ಬರ್</string>
+    <string name="wet_waste_desc">ಆಹಾರ ತ್ಯಾಜ್ಯ, ತರಕಾರಿ ಸಿಪ್ಪೆ, ಹಣ್ಣಿನ ತ್ಯಾಜ್ಯ, ತೋಟದ ಎಲೆಗಳು, ಹೂವುಗಳು</string>
+    <string name="hazardous_waste_desc">ಬ್ಯಾಟರಿಗಳು, ಎಲೆಕ್ಟ್ರಾನಿಕ್ ತ್ಯಾಜ್ಯ, ಔಷಧಿಗಳು, ಬಣ್ಣ, ರಾಸಾಯನಿಕಗಳು, ಬಲ್ಬ್‌ಗಳು</string>
+
+    <!-- AI Assistant -->
+    <string name="ai_assistant">AI ಸಹಾಯಕ</string>
+    <string name="classify_waste">ತ್ಯಾಜ್ಯ ವರ್ಗೀಕರಣ</string>
+    <string name="waste_chatbot">ತ್ಯಾಜ್ಯ ವಿಲೇವಾರಿ ಮಾರ್ಗದರ್ಶಿ</string>
+    <string name="ask_question">ತ್ಯಾಜ್ಯ ವಿಲೇವಾರಿ ಬಗ್ಗೆ ಪ್ರಶ್ನೆ ಕೇಳಿ…</string>
+    <string name="send">ಕಳುಹಿಸಿ</string>
+    <string name="ai_thinking">AI ಯೋಚಿಸುತ್ತಿದೆ…</string>
+    <string name="upload_waste_image">ತ್ಯಾಜ್ಯ ಪ್ರಕಾರವನ್ನು ವರ್ಗೀಕರಿಸಲು ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ</string>
+
+    <!-- Admin -->
+    <string name="admin_dashboard">ಅಡ್ಮಿನ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್</string>
+    <string name="total_reports">ಒಟ್ಟು ವರದಿಗಳು</string>
+    <string name="pending_reports">ಬಾಕಿ ವರದಿಗಳು</string>
+    <string name="resolved_reports">ಪರಿಹರಿಸಿದ ವರದಿಗಳು</string>
+    <string name="update_tractor">ಟ್ರ್ಯಾಕ್ಟರ್ ಸ್ಥಳ ನವೀಕರಿಸಿ</string>
+    <string name="update_status">ಸ್ಥಿತಿ ನವೀಕರಿಸಿ</string>
+    <string name="view_reports">ವರದಿಗಳನ್ನು ವೀಕ್ಷಿಸಿ</string>
+    <string name="manage_tractor">ಟ್ರ್ಯಾಕ್ಟರ್ ನಿರ್ವಹಣೆ</string>
+
+    <!-- Notifications -->
+    <string name="notifications">ಅಧಿಸೂಚನೆಗಳು</string>
+    <string name="tractor_nearby">ಟ್ರ್ಯಾಕ್ಟರ್ ಹತ್ತಿರ ಇದೆ!</string>
+    <string name="tractor_nearby_msg">ಕಸ ಸಂಗ್ರಹಣೆ ಟ್ರ್ಯಾಕ್ಟರ್ ನಿಮ್ಮ ಪ್ರದೇಶಕ್ಕೆ ಬರುತ್ತಿದೆ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಕಸವನ್ನು ಸಿದ್ಧವಾಗಿ ಇಡಿ.</string>
+
+    <!-- General -->
+    <string name="loading">ಲೋಡ್ ಆಗುತ್ತಿದೆ…</string>
+    <string name="error_occurred">ದೋಷ ಸಂಭವಿಸಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ</string>
+    <string name="retry">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="cancel">ರದ್ದು ಮಾಡಿ</string>
+    <string name="ok">ಸರಿ</string>
+    <string name="settings">ಸೆಟ್ಟಿಂಗ್‌ಗಳು</string>
+    <string name="language">ಭಾಷೆ</string>
+    <string name="english">English</string>
+    <string name="kannada">ಕನ್ನಡ</string>
+    <string name="select_language">ಭಾಷೆ ಆಯ್ಕೆ ಮಾಡಿ</string>
+    <string name="profile">ಪ್ರೊಫೈಲ್</string>
+    <string name="about">ಬಗ್ಗೆ</string>
+    <string name="version">ಆವೃತ್ತಿ 1.0.0</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.GramaWasteTracker" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/primary_dark</item>
+    </style>
+
+    <!-- Splash screen theme -->
+    <style name="Theme.GramaWasteTracker.Splash" parent="Theme.GramaWasteTracker">
+        <item name="android:windowBackground">@color/splash_background</item>
+    </style>
+</resources>

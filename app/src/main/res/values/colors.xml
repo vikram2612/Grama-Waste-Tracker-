@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Green/Blue Village Theme Colors -->
+    <color name="primary">#2E7D32</color>
+    <color name="primary_dark">#1B5E20</color>
+    <color name="primary_light">#4CAF50</color>
+    <color name="secondary">#0288D1</color>
+    <color name="secondary_dark">#01579B</color>
+    <color name="background">#F5F9F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#D32F2F</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="on_background">#1C1B1F</color>
+    <color name="on_surface">#1C1B1F</color>
+    <color name="splash_background">#1B5E20</color>
+    <color name="status_active">#4CAF50</color>
+    <color name="status_offline">#9E9E9E</color>
+    <color name="status_pending">#FF9800</color>
+    <color name="status_resolved">#2196F3</color>
+</resources>
