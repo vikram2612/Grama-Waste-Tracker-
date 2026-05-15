@@ -33,10 +33,10 @@ fun GramaNavGraph(
                     navController.navigate(Screen.Register.route)
                 },
                 onLoginSuccess = { user ->
-                    val dest = if (user?.role == User.ROLE_ADMIN) {
-                        Screen.AdminDashboard.route
-                    } else {
-                        Screen.Home.route
+                    val dest = when (user?.role) {
+                        User.ROLE_ADMIN -> Screen.AdminDashboard.route
+                        User.ROLE_TRACTOR -> Screen.TractorDashboard.route
+                        else -> Screen.Home.route
                     }
                     navController.navigate(dest) {
                         popUpTo(Screen.Login.route) { inclusive = true }
@@ -65,7 +65,6 @@ fun GramaNavGraph(
                 authViewModel = authViewModel,
                 onNavigateToBlackspot = { navController.navigate(Screen.ReportBlackspot.route) },
                 onNavigateToWasteGuide = { navController.navigate(Screen.WasteGuide.route) },
-                onNavigateToAiAssistant = { navController.navigate(Screen.AiAssistant.route) },
                 onNavigateToNotifications = { navController.navigate(Screen.Notifications.route) },
                 onNavigateToProfile = { navController.navigate(Screen.Profile.route) },
                 onNavigateToBlackspotList = { navController.navigate(Screen.BlackspotList.route) },
@@ -102,14 +101,6 @@ fun GramaNavGraph(
             val wasteGuideViewModel: WasteGuideViewModel = hiltViewModel()
             WasteGuideScreen(
                 viewModel = wasteGuideViewModel,
-                onBack = { navController.popBackStack() }
-            )
-        }
-
-        composable(Screen.AiAssistant.route) {
-            val aiViewModel: AiAssistantViewModel = hiltViewModel()
-            AiAssistantScreen(
-                viewModel = aiViewModel,
                 onBack = { navController.popBackStack() }
             )
         }
@@ -165,6 +156,20 @@ fun GramaNavGraph(
             AdminTractorScreen(
                 viewModel = adminViewModel,
                 onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.TractorDashboard.route) {
+            val adminViewModel: AdminViewModel = hiltViewModel()
+            TractorDashboardScreen(
+                adminViewModel = adminViewModel,
+                authViewModel = authViewModel,
+                onLogout = {
+                    authViewModel.logout()
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
             )
         }
     }

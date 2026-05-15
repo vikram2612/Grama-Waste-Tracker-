@@ -10,7 +10,6 @@ sealed class Screen(val route: String) {
     object ReportBlackspot : Screen("report_blackspot")
     object BlackspotList : Screen("blackspot_list")
     object WasteGuide : Screen("waste_guide")
-    object AiAssistant : Screen("ai_assistant")
     object Notifications : Screen("notifications")
     object Profile : Screen("profile")
     object Settings : Screen("settings")
@@ -19,6 +18,7 @@ sealed class Screen(val route: String) {
     object AdminDashboard : Screen("admin_dashboard")
     object AdminReports : Screen("admin_reports")
     object AdminTractor : Screen("admin_tractor")
+    object TractorDashboard : Screen("tractor_dashboard")
     object AdminReportDetail : Screen("admin_report_detail/{reportId}") {
         fun createRoute(reportId: String) = "admin_report_detail/$reportId"
     }

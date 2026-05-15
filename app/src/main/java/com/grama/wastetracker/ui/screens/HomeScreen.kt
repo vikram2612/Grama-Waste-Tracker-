@@ -19,8 +19,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.*
 import com.grama.wastetracker.R
 import com.grama.wastetracker.ui.theme.*
@@ -34,7 +36,6 @@ fun HomeScreen(
     authViewModel: AuthViewModel,
     onNavigateToBlackspot: () -> Unit,
     onNavigateToWasteGuide: () -> Unit,
-    onNavigateToAiAssistant: () -> Unit,
     onNavigateToNotifications: () -> Unit,
     onNavigateToProfile: () -> Unit,
     onNavigateToBlackspotList: () -> Unit,
@@ -99,11 +100,11 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(6.dp),
+                shape = RoundedCornerShape(24.dp),
+                elevation = CardDefaults.cardElevation(8.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White)
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(modifier = Modifier.padding(20.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -113,26 +114,27 @@ fun HomeScreen(
                             Text(
                                 stringResource(R.string.tractor_status),
                                 style = MaterialTheme.typography.titleMedium,
-                                color = OnSurfaceVariantLight
+                                color = OnSurfaceVariantLight,
+                                fontWeight = FontWeight.SemiBold
                             )
-                            Spacer(modifier = Modifier.height(4.dp))
+                            Spacer(modifier = Modifier.height(6.dp))
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Box(
                                     modifier = Modifier
-                                        .size(12.dp)
+                                        .size(14.dp)
                                         .clip(CircleShape)
                                         .background(
                                             if (tractorLocation?.isActive == true) StatusActive
                                             else StatusOffline
                                         )
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
+                                Spacer(modifier = Modifier.width(10.dp))
                                 Text(
                                     if (tractorLocation?.isActive == true)
                                         stringResource(R.string.active)
                                     else stringResource(R.string.offline),
                                     style = MaterialTheme.typography.headlineSmall,
-                                    fontWeight = FontWeight.Bold,
+                                    fontWeight = FontWeight.ExtraBold,
                                     color = if (tractorLocation?.isActive == true) StatusActive
                                     else StatusOffline
                                 )
@@ -142,19 +144,19 @@ fun HomeScreen(
                         // ETA Badge
                         if (tractorLocation?.isActive == true && homeState.estimatedMinutes != null) {
                             Surface(
-                                shape = RoundedCornerShape(16.dp),
+                                shape = RoundedCornerShape(20.dp),
                                 color = GreenSurface,
-                                border = BorderStroke(1.dp, GreenPrimary.copy(alpha = 0.3f))
+                                border = BorderStroke(1.5.dp, GreenPrimary.copy(alpha = 0.4f))
                             ) {
                                 Column(
-                                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
-                                    Text("ETA", style = MaterialTheme.typography.labelSmall, color = GreenPrimary)
+                                    Text("ETA", style = MaterialTheme.typography.labelMedium, color = GreenPrimary, fontWeight = FontWeight.Bold)
                                     Text(
                                         "${homeState.estimatedMinutes} min",
-                                        style = MaterialTheme.typography.titleLarge,
-                                        fontWeight = FontWeight.Bold,
+                                        style = MaterialTheme.typography.headlineMedium,
+                                        fontWeight = FontWeight.ExtraBold,
                                         color = GreenPrimaryDark
                                     )
                                 }
@@ -163,12 +165,26 @@ fun HomeScreen(
                     }
 
                     if (tractorLocation?.driverName?.isNotBlank() == true) {
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            "Driver: ${tractorLocation.driverName} • ${tractorLocation.routeName}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = OnSurfaceVariantLight
-                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            color = BackgroundLight,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(Icons.Outlined.Person, null, Modifier.size(16.dp), tint = GreenPrimary)
+                                Spacer(Modifier.width(8.dp))
+                                Text(
+                                    "Driver: ${tractorLocation.driverName} • ${tractorLocation.routeName}",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = OnSurfaceVariantLight,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -177,22 +193,27 @@ fun HomeScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp)
+                    .height(280.dp)
                     .padding(horizontal = 16.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(4.dp)
+                shape = RoundedCornerShape(24.dp),
+                elevation = CardDefaults.cardElevation(6.dp)
             ) {
                 Box {
                     GoogleMap(
                         modifier = Modifier.fillMaxSize(),
                         cameraPositionState = cameraPositionState,
-                        uiSettings = MapUiSettings(zoomControlsEnabled = false)
+                        uiSettings = MapUiSettings(zoomControlsEnabled = false),
+                        properties = MapProperties(
+                            isMyLocationEnabled = false,
+                            mapStyleOptions = null // Can add custom styling later
+                        )
                     ) {
                         if (tractorLocation != null && tractorLocation.latitude != 0.0) {
                             Marker(
                                 state = MarkerState(position = tractorPos),
                                 title = "Kachara Gaadi",
-                                snippet = if (tractorLocation.isActive) "Active" else "Offline"
+                                snippet = if (tractorLocation.isActive) "Active" else "Offline",
+                                icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)
                             )
                         }
                     }
@@ -201,43 +222,44 @@ fun HomeScreen(
                     Surface(
                         modifier = Modifier
                             .align(Alignment.TopStart)
-                            .padding(8.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        color = GreenPrimaryDark.copy(alpha = 0.85f)
+                            .padding(12.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        color = GreenPrimaryDark.copy(alpha = 0.9f)
                     ) {
                         Row(
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(Icons.Filled.MyLocation, null, Modifier.size(14.dp), tint = Color.White)
-                            Spacer(Modifier.width(4.dp))
+                            Icon(Icons.Filled.MyLocation, null, Modifier.size(16.dp), tint = Color.White)
+                            Spacer(Modifier.width(6.dp))
                             Text(
                                 stringResource(R.string.tractor_live_location),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = Color.White
+                                style = MaterialTheme.typography.labelMedium,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
                             )
                         }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
             // Quick Actions Grid
             Text(
                 "Quick Actions",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(horizontal = 16.dp),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.ExtraBold,
+                modifier = Modifier.padding(horizontal = 20.dp),
                 color = OnSurfaceLight
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 QuickActionCard(
                     modifier = Modifier.weight(1f),
@@ -255,21 +277,14 @@ fun HomeScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                QuickActionCard(
-                    modifier = Modifier.weight(1f),
-                    icon = Icons.Filled.SmartToy,
-                    title = stringResource(R.string.ai_assistant),
-                    color = BluePrimary,
-                    onClick = onNavigateToAiAssistant
-                )
                 QuickActionCard(
                     modifier = Modifier.weight(1f),
                     icon = Icons.Filled.List,
@@ -277,6 +292,7 @@ fun HomeScreen(
                     color = StatusPending,
                     onClick = onNavigateToBlackspotList
                 )
+                Spacer(modifier = Modifier.weight(1f))
             }
 
             Spacer(modifier = Modifier.height(24.dp))

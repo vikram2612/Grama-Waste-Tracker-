@@ -78,7 +78,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun register(fullName: String, email: String, password: String, phone: String, village: String) {
+    fun register(fullName: String, email: String, password: String, phone: String, village: String, role: String = User.ROLE_CITIZEN) {
         if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
             _uiState.update { it.copy(error = "Please fill in all required fields") }
             return
@@ -93,7 +93,7 @@ class AuthViewModel @Inject constructor(
                 fullName = fullName,
                 phone = phone,
                 villageName = village,
-                role = User.ROLE_CITIZEN
+                role = role
             )
             authRepository.register(email, password, user).fold(
                 onSuccess = { firebaseUser ->

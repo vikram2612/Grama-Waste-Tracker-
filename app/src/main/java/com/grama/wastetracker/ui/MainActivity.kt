@@ -17,6 +17,7 @@ import com.grama.wastetracker.ui.navigation.GramaNavGraph
 import com.grama.wastetracker.ui.navigation.Screen
 import com.grama.wastetracker.ui.theme.GramaWasteTrackerTheme
 import com.grama.wastetracker.ui.viewmodel.AuthViewModel
+import com.grama.wastetracker.ui.viewmodel.ThemeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +29,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            GramaWasteTrackerTheme {
+            val themeViewModel: ThemeViewModel = hiltViewModel()
+            val isDarkMode by themeViewModel.isDarkMode.collectAsState()
+
+            GramaWasteTrackerTheme(darkTheme = isDarkMode) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

@@ -48,14 +48,8 @@
     <string name="wet_waste_desc">Food scraps, vegetable peels, fruit waste, garden leaves, flowers</string>
     <string name="hazardous_waste_desc">Batteries, electronic waste, medicines, paint, chemicals, bulbs</string>
 
-    <!-- AI Assistant -->
-    <string name="ai_assistant">AI Assistant</string>
-    <string name="classify_waste">Classify Waste</string>
-    <string name="waste_chatbot">Waste Disposal Guide</string>
-    <string name="ask_question">Ask a question about waste disposal…</string>
-    <string name="send">Send</string>
-    <string name="ai_thinking">AI is thinking…</string>
-    <string name="upload_waste_image">Upload an image to classify waste type</string>
+    <!-- AI Assistant - REMOVED -->
+
 
     <!-- Admin -->
     <string name="admin_dashboard">Admin Dashboard</string>

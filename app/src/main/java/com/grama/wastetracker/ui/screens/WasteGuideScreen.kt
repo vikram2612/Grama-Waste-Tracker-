@@ -113,12 +113,12 @@ fun WasteGuideCard(guide: WasteGuideItem) {
                     Text(
                         guide.titleKn,
                         style = MaterialTheme.typography.bodySmall,
-                        color = OnSurfaceVariantLight
+                        color = OnSurfaceLight
                     )
                 }
                 Icon(
                     if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                    null, tint = OnSurfaceVariantLight
+                    null, tint = OnSurfaceLight
                 )
             }
 
@@ -148,7 +148,7 @@ fun WasteGuideCard(guide: WasteGuideItem) {
                             Column {
                                 Text(item, style = MaterialTheme.typography.bodyMedium)
                                 if (index < guide.itemsKn.size) {
-                                    Text(guide.itemsKn[index], style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariantLight)
+                                    Text(guide.itemsKn[index], style = MaterialTheme.typography.bodySmall, color = OnSurfaceLight)
                                 }
                             }
                         }
@@ -169,7 +169,7 @@ fun WasteGuideCard(guide: WasteGuideItem) {
                                 Text("Disposal Tip", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold, color = color)
                                 Spacer(Modifier.height(4.dp))
                                 Text(guide.disposalTip, style = MaterialTheme.typography.bodySmall, color = OnSurfaceLight)
-                                Text(guide.disposalTipKn, style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariantLight)
+                                Text(guide.disposalTipKn, style = MaterialTheme.typography.bodySmall, color = OnSurfaceLight)
                             }
                         }
                     }

@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import com.grama.wastetracker.R
 import com.grama.wastetracker.data.model.User
 import com.grama.wastetracker.ui.theme.*
+import com.grama.wastetracker.ui.viewmodel.ThemeViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,6 +31,9 @@ fun ProfileScreen(
     onBack: () -> Unit,
     onLogout: () -> Unit
 ) {
+    val themeViewModel: ThemeViewModel = hiltViewModel()
+    val isDarkMode by themeViewModel.isDarkMode.collectAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -36,10 +41,19 @@ fun ProfileScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) { Icon(Icons.Filled.ArrowBack, "Back") }
                 },
+                actions = {
+                    IconButton(onClick = { themeViewModel.toggleTheme() }) {
+                        Icon(
+                            imageVector = if (isDarkMode) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                            contentDescription = "Toggle Theme"
+                        )
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = GreenPrimary,
                     titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
+                    navigationIconContentColor = Color.White,
+                    actionIconContentColor = Color.White
                 )
             )
         }
@@ -81,7 +95,7 @@ fun ProfileScreen(
                     }
                     Spacer(Modifier.height(12.dp))
                     Text(user?.fullName ?: "User", style = MaterialTheme.typography.headlineSmall, color = Color.White, fontWeight = FontWeight.Bold)
-                    Text(user?.email ?: "", style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = 0.8f))
+                    Text(user?.email ?: "", style = MaterialTheme.typography.bodyMedium, color = Color.White)
                     if (user?.role == User.ROLE_ADMIN) {
                         Spacer(Modifier.height(8.dp))
                         Surface(shape = RoundedCornerShape(8.dp), color = Color.White.copy(alpha = 0.2f)) {
@@ -152,7 +166,7 @@ private fun ProfileInfoRow(icon: ImageVector, label: String, value: String) {
         Icon(icon, null, Modifier.size(22.dp), tint = GreenPrimary)
         Spacer(Modifier.width(16.dp))
         Column(modifier = Modifier.weight(1f)) {
-            Text(label, style = MaterialTheme.typography.bodySmall, color = OnSurfaceVariantLight)
+            Text(label, style = MaterialTheme.typography.bodySmall, color = OnSurfaceLight)
             Text(value, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Medium)
         }
     }

@@ -16,6 +16,7 @@ data class User(
     companion object {
         const val ROLE_CITIZEN = "citizen"
         const val ROLE_ADMIN = "admin"
+        const val ROLE_TRACTOR = "tractor"
     }
 }
 

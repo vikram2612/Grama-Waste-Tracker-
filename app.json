@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Grama-Waste Tracker",
+    "slug": "grama-waste-tracker",
+    "android": {
+      "package": "com.grama.wastetracker"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "27b6f2b4-8605-4515-84d8-5ceb2df1bb55"
+      }
+    }
+  }
+}

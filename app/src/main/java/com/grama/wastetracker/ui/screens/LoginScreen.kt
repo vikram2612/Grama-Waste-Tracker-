@@ -39,6 +39,7 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var selectedTab by remember { mutableIntStateOf(0) } // 0 for User, 1 for Tractor
 
     LaunchedEffect(uiState.isLoggedIn) {
         if (uiState.isLoggedIn && !uiState.isLoading) {
@@ -53,7 +54,10 @@ fun LoginScreen(
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(GradientGreenStart, GradientGreenEnd, BackgroundLight),
+                        colors = if (selectedTab == 0) 
+                            listOf(GradientGreenStart, GradientGreenEnd, BackgroundLight)
+                        else 
+                            listOf(BluePrimary, BluePrimaryDark, BackgroundLight),
                         startY = 0f,
                         endY = 1200f
                     )
@@ -71,16 +75,16 @@ fun LoginScreen(
 
             // App Icon
             Surface(
-                modifier = Modifier.size(80.dp),
-                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier.size(90.dp),
+                shape = RoundedCornerShape(24.dp),
                 color = Color.White.copy(alpha = 0.2f),
-                border = BorderStroke(2.dp, Color.White.copy(alpha = 0.3f))
+                border = BorderStroke(2.dp, Color.White.copy(alpha = 0.4f))
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(
-                        Icons.Filled.Eco,
+                        if (selectedTab == 0) Icons.Filled.Eco else Icons.Filled.LocalShipping,
                         contentDescription = null,
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(54.dp),
                         tint = Color.White
                     )
                 }
@@ -89,34 +93,59 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.headlineLarge,
+                text = if (selectedTab == 0) stringResource(R.string.app_name) else "Tractor Portal",
+                style = MaterialTheme.typography.displaySmall,
                 color = Color.White,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.ExtraBold
             )
             Text(
-                text = stringResource(R.string.app_tagline),
+                text = if (selectedTab == 0) stringResource(R.string.app_tagline) else "Driver & Route Management",
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.White.copy(alpha = 0.8f)
+                color = Color.White.copy(alpha = 0.9f)
             )
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(32.dp))
+
+            // Tab Selection
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color.White.copy(alpha = 0.15f))
+                    .padding(4.dp)
+            ) {
+                TabButton(
+                    modifier = Modifier.weight(1f),
+                    selected = selectedTab == 0,
+                    text = "User",
+                    onClick = { selectedTab = 0 }
+                )
+                TabButton(
+                    modifier = Modifier.weight(1f),
+                    selected = selectedTab == 1,
+                    text = "Tractor",
+                    onClick = { selectedTab = 1 }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
 
             // Login Card
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(32.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
             ) {
                 Column(
-                    modifier = Modifier.padding(24.dp),
+                    modifier = Modifier.padding(28.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = stringResource(R.string.login),
+                        text = if (selectedTab == 0) "Welcome Back" else "Driver Login",
                         style = MaterialTheme.typography.headlineMedium,
-                        color = GreenPrimaryDark
+                        color = if (selectedTab == 0) GreenPrimaryDark else BluePrimaryDark,
+                        fontWeight = FontWeight.Bold
                     )
 
                     Spacer(modifier = Modifier.height(24.dp))
@@ -125,15 +154,17 @@ fun LoginScreen(
                         value = email,
                         onValueChange = { email = it },
                         label = { Text(stringResource(R.string.email)) },
-                        leadingIcon = { Icon(Icons.Outlined.Email, null) },
+                        leadingIcon = { Icon(Icons.Outlined.Email, null, tint = if (selectedTab == 0) GreenPrimary else BluePrimary) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(16.dp),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = GreenPrimary,
-                            focusedLabelColor = GreenPrimary,
-                            cursorColor = GreenPrimary
+                            focusedTextColor = Color.Black,
+                            unfocusedTextColor = Color.Black,
+                            focusedBorderColor = if (selectedTab == 0) GreenPrimary else BluePrimary,
+                            focusedLabelColor = if (selectedTab == 0) GreenPrimary else BluePrimary,
+                            cursorColor = if (selectedTab == 0) GreenPrimary else BluePrimary
                         )
                     )
 
@@ -143,7 +174,7 @@ fun LoginScreen(
                         value = password,
                         onValueChange = { password = it },
                         label = { Text(stringResource(R.string.password)) },
-                        leadingIcon = { Icon(Icons.Outlined.Lock, null) },
+                        leadingIcon = { Icon(Icons.Outlined.Lock, null, tint = if (selectedTab == 0) GreenPrimary else BluePrimary) },
                         trailingIcon = {
                             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                                 Icon(
@@ -157,11 +188,13 @@ fun LoginScreen(
                         else PasswordVisualTransformation(),
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(16.dp),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = GreenPrimary,
-                            focusedLabelColor = GreenPrimary,
-                            cursorColor = GreenPrimary
+                            focusedTextColor = Color.Black,
+                            unfocusedTextColor = Color.Black,
+                            focusedBorderColor = if (selectedTab == 0) GreenPrimary else BluePrimary,
+                            focusedLabelColor = if (selectedTab == 0) GreenPrimary else BluePrimary,
+                            cursorColor = if (selectedTab == 0) GreenPrimary else BluePrimary
                         )
                     )
 
@@ -174,7 +207,7 @@ fun LoginScreen(
                         Text(
                             stringResource(R.string.forgot_password),
                             color = BluePrimary,
-                            style = MaterialTheme.typography.bodySmall
+                            style = MaterialTheme.typography.labelLarge
                         )
                     }
 
@@ -187,7 +220,7 @@ fun LoginScreen(
                             colors = CardDefaults.cardColors(
                                 containerColor = RedError.copy(alpha = 0.1f)
                             ),
-                            shape = RoundedCornerShape(8.dp)
+                            shape = RoundedCornerShape(12.dp)
                         ) {
                             Text(
                                 text = uiState.error ?: "",
@@ -204,11 +237,11 @@ fun LoginScreen(
                         onClick = { viewModel.login(email, password) },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(52.dp),
+                            .height(56.dp),
                         enabled = !uiState.isLoading,
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(16.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = GreenPrimary
+                            containerColor = if (selectedTab == 0) GreenPrimary else BluePrimary
                         )
                     ) {
                         if (uiState.isLoading) {
@@ -219,26 +252,55 @@ fun LoginScreen(
                             )
                         } else {
                             Text(
-                                stringResource(R.string.login),
+                                "Login",
                                 style = MaterialTheme.typography.titleMedium,
-                                color = Color.White
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
                             )
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    TextButton(onClick = onNavigateToRegister) {
-                        Text(
-                            stringResource(R.string.dont_have_account),
-                            color = GreenPrimary,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
+                    if (selectedTab == 0) {
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TextButton(onClick = onNavigateToRegister) {
+                            Text(
+                                stringResource(R.string.dont_have_account),
+                                color = GreenPrimary,
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
                     }
                 }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
+        }
+    }
+}
+
+@Composable
+fun TabButton(
+    modifier: Modifier = Modifier,
+    selected: Boolean,
+    text: String,
+    onClick: () -> Unit
+) {
+    Surface(
+        modifier = modifier
+            .height(40.dp)
+            .clickable(onClick = onClick),
+        shape = RoundedCornerShape(12.dp),
+        color = if (selected) Color.White else Color.Transparent,
+        shadowElevation = if (selected) 4.dp else 0.dp
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Text(
+                text = text,
+                color = if (selected) GreenPrimaryDark else Color.White,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal
+            )
         }
     }
 }

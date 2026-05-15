@@ -34,33 +34,29 @@ private val DarkColorScheme = darkColorScheme(
     primary = GreenPrimaryNight,
     onPrimary = GreenPrimaryDark,
     primaryContainer = GreenPrimaryDark,
-    onPrimaryContainer = GreenSurface,
+    onPrimaryContainer = GreenPrimaryNight,
     secondary = BluePrimaryNight,
     onSecondary = BluePrimaryDark,
     secondaryContainer = BluePrimaryDark,
-    onSecondaryContainer = BlueLight,
+    onSecondaryContainer = BluePrimaryNight,
     tertiary = OrangeAccent,
     error = RedError,
     background = BackgroundDark,
     onBackground = OnSurfaceDark,
     surface = SurfaceDark,
     onSurface = OnSurfaceDark,
+    onSurfaceVariant = OnSurfaceVariantDark,
+    outline = OnSurfaceVariantDark,
+    surfaceVariant = SurfaceDark
 )
 
 @Composable
 fun GramaWasteTrackerTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = false,
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalView.current.context
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
     val view = LocalView.current
     if (!view.isInEditMode) {
