@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌿 Grama-Waste Tracker
 
 **Clean Village, Green Village** | ಸ್ವಚ್ಛ ಹಳ್ಳಿ, ಹಸಿರು ಹಳ್ಳಿ
@@ -330,3 +331,6 @@ Free to use for Gram Panchayat and village-level deployment.
 ---
 
 **Built with ❤️ for Clean Villages**
+=======
+# Grama-Waste-Tracker-
+>>>>>>> b6b3bd77abaf306ddd3c03001a943aad3a28694c
